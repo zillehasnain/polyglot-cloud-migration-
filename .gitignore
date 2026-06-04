@@ -1,0 +1,18 @@
+# IDEs
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+bin/
+obj/
+venv/
+__pycache__/
+
+# Security (Section 7 Forbidden list)
+.env
+*.pem
+*.key
+terraform.tfstate*
+terraform.tfvars
+.terraform/

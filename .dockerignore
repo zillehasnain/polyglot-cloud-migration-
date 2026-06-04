@@ -1,0 +1,16 @@
+# Ignore all local dependencies
+node_modules
+**/node_modules
+bin
+**/bin
+obj
+**/obj
+venv
+**/.venv
+
+# Ignore logs and local environment
+.env
+.git
+.vscode
+dist
+**/dist

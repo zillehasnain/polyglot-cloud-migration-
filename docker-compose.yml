@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend-dotnet
+    ports:
+      - "5000:5000" # Map 5000 on Mac to 5000 inside the container
+    networks:
+      - health-net
+
+  alert-service:
+    build: ./alert-service
+    ports:
+      - "6001:6001" # Using the safe port 6001
+    networks:
+      - health-net
+
+  worker:
+    build: ./worker-python
+    environment:
+      # Inside Docker, we must include the port 5000 and 6001
+      - API_URL=http://backend:5000/api
+      - NOTIFY_URL=http://alert-service:6001
+    depends_on:
+      - backend
+      - alert-service
+    networks:
+      - health-net
+
+  frontend:
+    build: ./frontend-js
+    ports:
+      - "3000:80"
+    environment:
+      # These are for the browser to find the services on your Mac
+      - VITE_API_URL=http://localhost:5000/api
+      - VITE_ALERT_URL=http://localhost:6001
+    networks:
+      - health-net
+
+networks:
+  health-net:
+    driver: bridge
