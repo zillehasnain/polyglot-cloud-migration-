@@ -1,4 +1,6 @@
-def test_placeholder():
-    # A simple test to prove the CI pipeline works later
-    worker_status = "active"
-    assert worker_status == "active"
+def test_ai_logic_placeholder():
+    # This proves the CI can execute Python logic
+    threshold = 110
+    current_hr = 120
+    is_critical = current_hr > threshold
+    assert is_critical is True
